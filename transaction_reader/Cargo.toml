@@ -1,0 +1,12 @@
+[package]
+name = "transaction_reader"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+transaction = { path = "../transaction" }
+clap = { version = "4.5.51", features = [ "derive" ] }
+anyhow = "1.0.100"
+serde = { version = "1.0.228", features = ["derive"] }
+csv = "1.4.0"
+
