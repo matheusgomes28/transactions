@@ -1,5 +1,4 @@
 pub mod client;
-pub mod parser;
 pub mod transaction;
 
 pub use client::ClientAccount;
