@@ -33,11 +33,12 @@ impl Serialize for ClientAccount {
     {
         let mut state = serializer.serialize_struct("ClientAccount", 5)?;
         state.serialize_field("client", &self.client_id)?;
-        state.serialize_field("available", &self.available)?;
-        state.serialize_field("held", &self.held)?;
+
+        state.serialize_field("available", &format!("{:.4}", self.available))?;
+        state.serialize_field("held", &format!("{:.4}", self.held))?;
 
         let total = self.available + self.held;
-        state.serialize_field("total", &total)?;
+        state.serialize_field("total", &format!("{:.4}", total))?;
 
         state.serialize_field("locked", &self.locked)?;
         state.end()

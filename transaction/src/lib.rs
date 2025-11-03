@@ -6,6 +6,7 @@ pub use transaction::Transaction;
 
 use std::collections::HashMap;
 
+// Notes on `Ledger` and `AccountStore`:
 // Ideally, some chronologically sorted timestamped structure,
 // easy to query for an ID. However, the usecase only requires
 // a map here and no replay for the accounts and ledger.
@@ -30,8 +31,7 @@ impl TransactionEngine {
     }
 
     pub fn handle(&mut self, transaction: Transaction) -> anyhow::Result<()> {
-        // Add the transaction to the ledger regarless for possible replay / reconciliation
-        // we don't care whether it succeeds or not - it's recorded and can be replayed
+        // We only need to track the Deposits and Withdrawals in these usecases
         match transaction {
             Transaction::Deposit { transaction_id, .. }
             | Transaction::Withdraw { transaction_id, .. } => {
