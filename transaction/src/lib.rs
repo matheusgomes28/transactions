@@ -54,6 +54,10 @@ impl TransactionEngine {
                 client_id, amount, ..
             } => {
                 let client_acc = self.get_or_create_client(client_id);
+
+                if amount < 0.0 {
+                    anyhow::bail!("cannot deposit negative amount");
+                }
                 client_acc.available += amount;
                 Ok(())
             }
@@ -62,6 +66,10 @@ impl TransactionEngine {
                 client_id, amount, ..
             } => {
                 let client_acc = self.get_or_create_client(client_id);
+
+                if amount < 0.0 {
+                    anyhow::bail!("cannot withdraw negative amount");
+                }
 
                 if client_acc.locked {
                     anyhow::bail!("client account {:?} is locked", client_id);
